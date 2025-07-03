@@ -1,22 +1,33 @@
 # 🎬 Movie Recommendation System
 
-This project implements a **popularity-based** and **genre-specific movie recommendation system** using movie metadata from TMDB. It filters and ranks movies based on vote count, average rating, and genre using an IMDb-style weighted formula.
+This project implements a full-fledged **movie recommendation system** using multiple strategies:
+- Popularity-based (IMDb-style weighted rating)
+- Genre-specific filtering
+- Content-based filtering
+- Collaborative filtering
+- Hybrid approach combining content and user behavior
 
 ---
 
 ## 🔍 Features
 
 - ✅ **Weighted Rating Algorithm**  
-  Recommends movies using an IMDb-style weighted formula combining vote average and vote count.
+  Uses IMDb-style weighted average to rank popular movies.
 
 - ✅ **Genre-Based Filtering**  
-  Generates top movie recommendations by specific genres like Action, Comedy, Drama, etc.
+  Generates top movie recommendations within specific genres like Action, Comedy, Drama, etc.
+
+- ✅ **Content-Based Filtering**  
+  Recommends similar movies using cosine similarity on TF-IDF vectors built from movie overviews, keywords, and genres.
+
+- ✅ **Collaborative Filtering**  
+  Uses matrix factorization (e.g., SVD from the Surprise library) to predict user preferences based on rating patterns.
+
+- ✅ **Hybrid Recommendation Engine**  
+  Combines content-based and collaborative filtering results for more accurate, personalized suggestions.
 
 - ✅ **Data Preprocessing & Feature Engineering**  
-  Cleans and transforms complex nested genre data using `ast.literal_eval`.
-
-- ✅ **(Optional) Data Visualization**  
-  Can be extended to visualize trends using Seaborn and Matplotlib.
+  Handles nested genre fields, missing data, and feature extraction from metadata.
 
 ---
 
@@ -25,9 +36,14 @@ This project implements a **popularity-based** and **genre-specific movie recomm
 - **Movies Metadata**
   - Format: `CSV`
   - Source: [Kaggle - TMDB Movie Metadata](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)
-  - Key Columns: `title`, `genres`, `vote_count`, `vote_average`, `release_date`, `popularity`, etc.
+  - Columns: `title`, `genres`, `overview`, `vote_count`, `vote_average`, `release_date`, `popularity`, etc.
+
+- **Ratings Dataset**
+  - Format: `TSV`
+  - Columns: `user_id`, `item_id`, `rating`, `timestamp`
 
 ---
+
 
 ## ⚙️ Requirements
 
@@ -101,8 +117,6 @@ jupyter notebook movie_recommendation.ipynb
 
 ## 🚧 Future Enhancements
 
-- 🔄 Integrate **collaborative filtering** using Surprise or LightFM.
-- 🤝 Combine **content-based and collaborative methods** (hybrid model).
 - 🌐 Build a user-friendly web interface using **Streamlit** or **Flask**.
 - 📡 Fetch real-time data from **TMDB or IMDb APIs**.
 
